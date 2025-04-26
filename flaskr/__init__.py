@@ -27,6 +27,17 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/hello')
     def hello():
-        return 'Hello, World from Flaskr!'
+        return 'Hello, World!'
 
+# Suggested code may be subject to a license. Learn more: ~LicenseLog:2232055052.
+    from . import db
+    db.init_app(app)
+
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')
+    
     return app
